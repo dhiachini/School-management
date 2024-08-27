@@ -6,6 +6,8 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
 const authRouter = require('./routes/authentification.route');
+const newsRoutes = require('./routes/news.route');
+
 
 
 
@@ -35,6 +37,8 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // Other app.use statements
 app.use('/admin', authRouter);
+app.use('/api/news', newsRoutes);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
