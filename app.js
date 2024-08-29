@@ -1,20 +1,21 @@
-require('dotenv').config();
+require("dotenv").config();
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 const mongoose = require("mongoose");
-const authRouter = require('./routes/authentification.route');
-const newsRoutes = require('./routes/news.route');
+const authRouter = require("./routes/authentification.route");
+const newsRoutes = require("./routes/news.route");
+const fraisRoutes = require("./routes/frais.route");
+const calendrierScolaireRoutes = require("./routes/calendrierScolaire.route");
+const formulaireDePreinscriptionRoutes = require('./routes/formulaireDePreinscription.route');
 
 
 
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
-
-
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log("DB connected"))
@@ -36,9 +38,11 @@ mongoose
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 // Other app.use statements
-app.use('/admin', authRouter);
-app.use('/api/news', newsRoutes);
-
+app.use("/admin", authRouter);
+app.use("/api/news", newsRoutes);
+app.use("/api/frais", fraisRoutes);
+app.use("/api/calendrier-scolaire", calendrierScolaireRoutes);
+app.use('/api/formulaire-preinscription', formulaireDePreinscriptionRoutes);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
