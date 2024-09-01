@@ -5,7 +5,7 @@ const cloudinary = require('../cloudinary');
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
-      { folder: 'calendrier-scolaire' },
+      { folder: 'emplois du temps' },
       (error, result) => {
         if (error) {
           reject(new Error('Cloudinary upload failed'));
