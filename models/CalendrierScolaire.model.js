@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const calendrierScolaireSchema = new mongoose.Schema({
+  anneeScolaire: {
+    type: String,
+    required: true,
+  },
   niveau: {
     type: String,
     required: true,

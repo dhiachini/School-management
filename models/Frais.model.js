@@ -5,6 +5,10 @@ const fraisSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  anneeScolaire: {
+    type: String,
+    required: true,
+  },
   montantMensuelle: {
     type: String,
     required: true,

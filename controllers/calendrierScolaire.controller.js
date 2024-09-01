@@ -21,7 +21,8 @@ const uploadToCloudinary = (fileBuffer) => {
 // Create CalendrierScolaire
 exports.createCalendrierScolaire = async (req, res) => {
   try {
-    const { niveau } = req.body;
+    const { anneeScolaire  } = req.body;
+    const { niveau  } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: 'Emploi de temps image is required' });
@@ -31,6 +32,7 @@ exports.createCalendrierScolaire = async (req, res) => {
     const result = await uploadToCloudinary(req.file.buffer);
 
     const calendrierScolaire = new CalendrierScolaire({
+      anneeScolaire,
       niveau,
       emploiDeTemps: result.secure_url,
     });
@@ -71,6 +73,7 @@ exports.getCalendrierScolaireById = async (req, res) => {
 // Update CalendrierScolaire
 exports.updateCalendrierScolaire = async (req, res) => {
   try {
+    const { anneeScolaire } = req.body;
     const { niveau } = req.body;
     const calendrierScolaire = await CalendrierScolaire.findById(req.params.id);
     if (!calendrierScolaire) {
@@ -83,7 +86,8 @@ exports.updateCalendrierScolaire = async (req, res) => {
       const result = await uploadToCloudinary(req.file.buffer);
       calendrierScolaire.emploiDeTemps = result.secure_url;
     }
-
+    
+    calendrierScolaire.anneeScolaire = anneeScolaire || calendrierScolaire.anneeScolaire;
     calendrierScolaire.niveau = niveau || calendrierScolaire.niveau;
 
     await calendrierScolaire.save();
