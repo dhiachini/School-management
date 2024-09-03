@@ -7,8 +7,8 @@ const router = express.Router();
 
 // Routes
 router.post('/', auth, upload.single('emploiDeTemps'), createCalendrierScolaire);
-router.get('/', auth, getAllCalendrierScolaire);
-router.get('/:id', auth, getCalendrierScolaireById);
+router.get('/', getAllCalendrierScolaire);
+router.get('/:id', getCalendrierScolaireById);
 router.put('/:id', auth, upload.single('emploiDeTemps'), updateCalendrierScolaire);
 router.delete('/:id', auth, deleteCalendrierScolaire);
 
